@@ -38,3 +38,7 @@ class WebSocketServer:
         if self.loop:
             self.loop.stop()
             print(f"WebSocket server stopped on ws://{self.host}:{self.port}")
+
+if __name__ == "__main__":
+    server = WebSocketServer()
+    server.start()
