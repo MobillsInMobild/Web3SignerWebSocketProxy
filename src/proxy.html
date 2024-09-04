@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Proxy</title>
+</head>
+
+<body>
+    <script type="module">
+        import { ethers } from "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.min.js";;
+        let socket;
+        let signer;
+        let provider;
+        async function init() {
+            if (typeof window.ethereum !== 'undefined') {
+                console.log("Wallet detected.");
+                provider = new ethers.BrowserProvider(window.ethereum);
+                await provider.send("eth_requestAccounts", []);
+
+                signer = await provider.getSigner(0);
+                console.log("Wallet connected.");
+                console.log("signer:", signer);
+            } else {
+                console.error("Please install a wallet extension like MetaMask.");
+                return;
+            }
+            connect();
+        }
+
+        function connect() {
+            socket = new WebSocket("ws://localhost:8765");
+            
+            socket.onopen = function () {
+                console.log("WebSocket connection established");
+            };
+
+            socket.onmessage = async function (event) {
+                console.log("Message from server:", event.data);
+                const data = JSON.parse(event.data);
+                console.log("Parsed Data:", data);
+                try {
+                    const response = await signer.sendTransaction(data);
+                    console.log("Transaction Response:", response);
+                    socket.send(JSON.stringify(response));
+                } catch (error) {
+                    console.error("Transaction Error:", error);
+                    socket.send(JSON.stringify({
+                        error: error.message
+                    }));
+                }
+            };
+
+            socket.onclose = function (event) {
+                //console.log("WebSocket connection closed:", event);
+                setTimeout(connect, 1000);
+            };
+
+            socket.onerror = function (error) {
+                //console.error("WebSocket error:", error);
+            };
+
+        }
+        init();
+    </script>
+</body>
+
+</html>
