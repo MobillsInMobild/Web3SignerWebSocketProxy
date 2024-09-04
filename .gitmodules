@@ -4,3 +4,6 @@
 [submodule "demo/forge_demo/lib/solmate"]
 	path = demo/forge_demo/lib/solmate
 	url = https://github.com/transmissions11/solmate
+[submodule "demo/forge_demo/lib/openzeppelin-contracts"]
+	path = demo/forge_demo/lib/openzeppelin-contracts
+	url = https://github.com/Openzeppelin/openzeppelin-contracts
