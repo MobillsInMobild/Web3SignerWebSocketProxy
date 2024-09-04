@@ -32,7 +32,7 @@ Web3SignerWebSocketProxy is a project that provides a WebSocket proxy for sendin
 
 ### Running the Demo
 
-1. Open `proxy.html` in your browser to access the web interface.To handle possible CORS issues, you may need to install the [Cross Domain CORS Extension](https://chromewebstore.google.com/detail/mjhpgnbimicffchbodmgfnemoghjakai) on your browser.
+1. Open `proxy.html` in your browser by [Live Server (Five Server)](https://marketplace.visualstudio.com/items?itemName=yandeu.five-server) to access the web interface.To handle possible CORS issues, you may need to install the [Cross Domain CORS Extension](https://chromewebstore.google.com/detail/mjhpgnbimicffchbodmgfnemoghjakai) on your browser.
 
 1. Start the WebSocket server:
     ```sh
