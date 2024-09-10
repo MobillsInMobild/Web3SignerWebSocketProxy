@@ -42,6 +42,17 @@
             socket.onmessage = async function (event) {
                 console.log("Message from server:", event.data);
                 const data = JSON.parse(event.data);
+                if (data.type === 'init') {
+                    console.log(`Init message received, switching to network: ${data.network}(${data.chainId})`);
+                    await window.ethereum.request({
+                        method: 'wallet_switchEthereumChain',
+                        params: [{ chainId: data.chainId }]
+                    });
+                    console.log("Network switched.");
+                    return;
+                }
+
+
                 if (data.method === "eth_sendTransaction") {
                     if (typeof data.params[0].to !== 'undefined' && data.params[0].to === null) {
                         //data.params[0].to = '0x0000000000000000000000000000000000000000'

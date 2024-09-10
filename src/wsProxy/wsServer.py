@@ -1,5 +1,6 @@
 import argparse
 import asyncio
+import json
 import websockets
 from wsProxy.networks import NETWORKS
 
@@ -16,6 +17,13 @@ class WebSocketServer:
     async def handler(self, websocket, path):
         self.connections.add(websocket)
         try:
+            init_message = {
+                "type": "init",
+                "chainId": self.chainId,
+                "network": self.network,
+            }
+            await websocket.send(json.dumps(init_message))
+
             async for message in websocket:
                 sender_address = websocket.remote_address
                 print(f"Receive Message from {sender_address}: {message}")
