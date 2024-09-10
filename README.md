@@ -58,7 +58,7 @@ Web3SignerWebSocketProxy is a project that provides a WebSocket proxy for sendin
 3. Use the `forge create` command to deploy the contract. The contract used here is from the "Creating an NFT with Solmate" demo in the Foundry documentation. Note that the `--rpc-url` configuration is in `foundry.toml`, specifically the WebSocket URL for wsProxy. Both `--unlock` and `--from` are required command arguments.
 
     ```sh
-    forge create NFT --rpc-url=proxy --unlocked --from [wallet_address] --constructor-args "TEST_NAME" "TEST_SYMBOL"
+    forge create NFT --rpc-url=proxy --unlocked --from [wallet_address]  --constructor-args-path constructor-args.txt 
     ```
 
 4. Sign transactions on your browser and check your signed transactions on the blockchain browser.
