@@ -34,6 +34,8 @@
             
             socket.onopen = function () {
                 console.log("WebSocket connection established");
+                console.log("Sending init message");
+                socket.send(JSON.stringify({ type: 'HTMLInit' }));
                 setInterval(() => {
                     socket.send(JSON.stringify({ type: 'ping' }));
                 }, 30000);

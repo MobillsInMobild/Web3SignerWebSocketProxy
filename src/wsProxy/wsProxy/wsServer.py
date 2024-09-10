@@ -17,16 +17,19 @@ class WebSocketServer:
     async def handler(self, websocket, path):
         self.connections.add(websocket)
         try:
-            init_message = {
-                "type": "init",
-                "chainId": self.chainId,
-                "network": self.network,
-            }
-            await websocket.send(json.dumps(init_message))
-
             async for message in websocket:
                 sender_address = websocket.remote_address
                 print(f"Receive Message from {sender_address}: {message}")
+                data = json.loads(message)
+                if "type" in data and data["type"] == "HTMLInit":
+                    print(f"Send init message to {sender_address}")
+                    init_message = {
+                        "type": "init",
+                        "chainId": self.chainId,
+                        "network": self.network,
+                    }
+                    await websocket.send(json.dumps(init_message))
+                    continue
                 for connection in self.connections:
                     if connection != websocket:
                         receiver_address = connection.remote_address
