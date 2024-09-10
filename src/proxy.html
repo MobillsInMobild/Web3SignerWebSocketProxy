@@ -48,12 +48,15 @@
                     console.log(`Init message received, switching to network: ${data.network}(${data.chainId})`);
                     await window.ethereum.request({
                         method: 'wallet_switchEthereumChain',
-                        params: [{ chainId: data.chainId }]
+                        params: [{ chainId: ethers.toQuantity(data.chainId) }]
                     });
                     console.log("Network switched.");
                     return;
                 }
 
+                if (data.params !== 'undefined' && data.params === null) {
+                    data.params = [];
+                }
 
                 if (data.method === "eth_sendTransaction") {
                     if (typeof data.params[0].to !== 'undefined' && data.params[0].to === null) {
