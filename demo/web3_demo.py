@@ -5,7 +5,7 @@ import time
 from web3 import Web3
 from web3 import HTTPProvider
 
-server = WebSocketServer()
+server = WebSocketServer(network="eth")
 threading.Thread(target=server.start, daemon=True).start()
 
 time.sleep(1)
@@ -21,8 +21,7 @@ contract = w3.eth.contract(address=contractAddr, abi=contractABI)
 if server.is_running():
     client = WebSocketClient("ws://localhost:8765")
     transaction = contract.functions.decimals().build_transaction()
-    transaction["gasLimit"] = transaction["gas"]
-    transaction.pop("gas")
+    transaction['from'] = "0x91Aa4Fc7A9e64F42A7aEAdFBFF30EE2C9A2d4Ab2"
 
     print("Transaction:", transaction)
     result = client.send(transaction)
