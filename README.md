@@ -88,6 +88,17 @@ Web3SignerWebSocketProxy is a project that provides a WebSocket proxy for sendin
     - `foundry.toml`: Foundry configuration file, including WebSocket URL and other settings.
 - `README.md`: Project documentation.
 
+## Potential Bug
+
+**Issue**: There is a potential bug in the system where, if a transaction signature takes too long, Forge may throw an error：
+
+> ERROR alloy_transport_ws: failed to deserialize message err=missing field `params` at line 1 column 15
+
+When this error occurs, Forge attempts to resend the transaction that is waiting to be signed.
+
+**Impact**: Due to the nonce used in the transaction process, these duplicate transactions do not affect the actual transactions on the blockchain. At present, there seems to be no adverse effects.
+
+
 
 ## Acknowledgements
 
