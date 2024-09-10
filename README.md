@@ -61,7 +61,13 @@ Web3SignerWebSocketProxy is a project that provides a WebSocket proxy for sendin
     forge create NFT --rpc-url=proxy --unlocked --from [wallet_address]  --constructor-args-path constructor-args.txt 
     ```
 
-4. Sign transactions on your browser and check your signed transactions on the blockchain browser.
+3. Or use the `forge script` command to deploy the contract. 
+
+    ```sh
+    forge script script/NFT.s.sol --rpc-url=proxy --broadcast --sender=[wallet_address]  --unlocked
+    ```
+
+5. Sign transactions on your browser and check your signed transactions on the blockchain browser.
 
 ### Usage
 
