@@ -77,8 +77,6 @@ Web3SignerWebSocketProxy is a project that provides a WebSocket proxy for sendin
 
 ## Project Structure
 
-## Project Structure
-
 - `src/`: Contains the main source code.
   - `wsProxy/`: WebSocket proxy module.
   - `proxy.html`: Web interface for demonstrating transaction signing using the WebSocket proxy.
