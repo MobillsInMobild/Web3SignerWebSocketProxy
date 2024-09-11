@@ -22,7 +22,7 @@ Web3SignerWebSocketProxy is a project that provides a WebSocket proxy for sendin
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/Web3SignerWebSocketProxy.git
+    git clone https://github.com/MobillsInMobild/Web3SignerWebSocketProxy
     cd Web3SignerWebSocketProxy
     ```
 
